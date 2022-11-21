@@ -75,7 +75,7 @@ allRoutes.delete('/all/:id', async (req, res) => {
 
   await prisma.todo.delete({ where: { id: intId } });
 
-  return response.status(200).send();
+  return res.status(200).send();
 });
 
 module.exports = allRoutes;
