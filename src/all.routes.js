@@ -1,57 +1,56 @@
 const express = require('express');
-const all = [{ name: 'nvdia', status: false }];
 const allRoutes = express.Router();
 const { PrismaClient } = require('@prisma/client');
-const { response } = require('express');
 
 const prisma = new PrismaClient();
 
 // C
 
 allRoutes.post('/all', async (req, res) => {
-  const { name } = req.body;
-  const todo = await prisma.todo.create({
+  const { username, password } = req.body;
+  const users = await prisma.users.create({
     data: {
-      name,
+      username,
+      password,
     },
   });
   //all.push({ name, status: false });
-  return res.status(201).json(todo);
+  return res.status(201).json(users);
 });
 
 // R
 
 allRoutes.get('/all', async (req, res) => {
-  const todos = await prisma.todo.findMany();
-  return res.status(200).json(todos);
+  const users = await prisma.users.findMany();
+  return res.status(200).json(users);
 });
 
 // U || Modificar os dados
 
 allRoutes.put('/all', async (req, res) => {
-  const { name, id, status } = req.body;
+  const { username, id, password } = req.body;
 
   if (!id) {
     return res.status(400).json('Id is mandatory');
   }
 
-  const todoAlreadyExist = await prisma.todo.findUnique({ where: { id } });
+  const todoAlreadyExist = await prisma.users.findUnique({ where: { id } });
 
   if (!todoAlreadyExist) {
     return res.status(404).json('Todo not found');
   }
 
-  const todo = await prisma.todo.update({
+  const users = await prisma.users.update({
     where: {
       id,
     },
     data: {
-      name,
-      status,
+      username,
+      password,
     },
   });
 
-  return res.status(200).json(todo);
+  return res.status(200).json(users);
 });
 
 // D || DELETE
@@ -65,7 +64,7 @@ allRoutes.delete('/all/:id', async (req, res) => {
     return res.status(400).json('Id is mandatory');
   }
 
-  const todoAlreadyExist = await prisma.todo.findUnique({
+  const todoAlreadyExist = await prisma.users.findUnique({
     where: { id: intId },
   });
 
@@ -73,7 +72,7 @@ allRoutes.delete('/all/:id', async (req, res) => {
     return res.status(404).json(`Todo not found ${intId}`);
   }
 
-  await prisma.todo.delete({ where: { id: intId } });
+  await prisma.users.delete({ where: { id: intId } });
 
   return res.status(200).send();
 });

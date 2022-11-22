@@ -10,8 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id     Int     @id @default(autoincrement())
-  status Boolean @default(false)
-  name   String
+model Users {
+  id        Int      @id @default(autoincrement())
+  username  String?
+  password  Int?
+  createdAt DateTime @default(now())
+}
+
+model Accounts {
+  id      Int   @id @default(autoincrement())
+  balance Float
+}
+
+model Transactions {
+  id                Int   @id @default(autoincrement())
+  debitedAccountId  Float
+  creditedAccountid Float
+  value             Float
+  createdAt         Float
 }
