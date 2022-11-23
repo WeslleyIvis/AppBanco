@@ -6,23 +6,64 @@ const prisma = new PrismaClient();
 
 // C
 
-allRoutes.post('/all', async (req, res) => {
-  const { username, password } = req.body;
-  const users = await prisma.users.create({
-    data: {
-      username,
-      password,
-    },
-  });
+allRoutes.post('/:table', async (req, res) => {
+  const { table } = req.params;
+
+  if (table == 'users') {
+    const { username, password } = req.body;
+    const post = await prisma.users.create({
+      data: {
+        username,
+        password,
+      },
+    });
+    return res.status(201).json(post);
+  }
+
+  if (table == 'accounts') {
+    const { balance } = req.body;
+    const post = await prisma.accounts.create({
+      data: {
+        balance,
+      },
+    });
+    return res.status(201).json(post);
+  }
+
+  if (table == 'transactions') {
+    const { debitedAccountId, creditedAccountid, value, createdAt } = req.body;
+    const post = await prisma.transactions.create({
+      data: {
+        debitedAccountId,
+        creditedAccountid,
+        value,
+        createdAt,
+      },
+    });
+    return res.status(201).json(post);
+  }
+
   //all.push({ name, status: false });
-  return res.status(201).json(users);
 });
 
 // R
 
-allRoutes.get('/all', async (req, res) => {
-  const users = await prisma.users.findMany();
-  return res.status(200).json(users);
+allRoutes.get('/:table', async (req, res) => {
+  const { table } = req.params;
+  if (table == 'users') {
+    const get = await prisma.users.findMany();
+    return res.status(200).json(get);
+  }
+
+  if (table == 'accounts') {
+    const get = await prisma.accounts.findMany();
+    return res.status(200).json(get);
+  }
+
+  if (table == 'transactions') {
+    const get = await prisma.transactions.findMany();
+    return res.status(200).json(get);
+  }
 });
 
 // U || Modificar os dados
