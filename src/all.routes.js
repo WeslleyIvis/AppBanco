@@ -50,26 +50,19 @@ allRoutes.post('/:table', async (req, res) => {
 
 allRoutes.get('/:table', async (req, res) => {
   const { table } = req.params;
-  if (table == 'users') {
-    const get = await prisma.users.findMany();
-    return res.status(200).json(get);
-  }
+  let get;
 
-  if (table == 'accounts') {
-    const get = await prisma.accounts.findMany();
-    return res.status(200).json(get);
-  }
+  if (table == 'users') get = await prisma.users.findMany();
+  if (table == 'accounts') get = await prisma.accounts.findMany();
+  if (table == 'transactions') get = await prisma.transactions.findMany();
 
-  if (table == 'transactions') {
-    const get = await prisma.transactions.findMany();
-    return res.status(200).json(get);
-  }
+  return res.status(200).json(get);
 });
 
 // U || Modificar os dados
 
-allRoutes.put('/all', async (req, res) => {
-  const { username, id, password } = req.body;
+allRoutes.put('/:table', async (req, res) => {
+  const { id } = req.body;
 
   if (!id) {
     return res.status(400).json('Id is mandatory');
@@ -81,17 +74,19 @@ allRoutes.put('/all', async (req, res) => {
     return res.status(404).json('Todo not found');
   }
 
-  const users = await prisma.users.update({
-    where: {
-      id,
-    },
-    data: {
-      username,
-      password,
-    },
-  });
-
-  return res.status(200).json(users);
+  if (req.params.table == 'users') {
+    const { username, id, password } = req.body;
+    const users = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        username,
+        password,
+      },
+    });
+    return res.status(200).json(users);
+  }
 });
 
 // D || DELETE

@@ -1,0 +1,53 @@
+:root {
+    --border: 1px solid rgba(0, 0, 0, 0.185); 
+}
+
+h2 {
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.loginArea {
+    box-sizing: border-box;
+}
+
+.baseWidth {
+    margin: 0 auto;
+    padding: 10px;
+    width: 350px;
+    border: var(--border)
+}
+
+.loginArea input {
+    border: var(--border);
+    background-color: white;
+    padding: .8em;
+    margin: 4px 0;
+    width: 90%;
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginArea button {
+    border: none;
+    background-color: orange;
+    color: white;
+    padding: .5em;
+    margin: 10px 0;
+    width: 95%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+}
+
+.loginAreaOptions {
+
+}
+
+.new {
+    color: orange; 
+    cursor: pointer;    
+}
+
+.new:hover {
+    color: rgb(179, 116, 0);
+}

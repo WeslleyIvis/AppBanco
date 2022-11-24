@@ -1,11 +1,7 @@
 import './App.css';
+import Login from './components/Login';
 import React, { useEffect } from 'react';
 import axios from 'axios';
-
-const arrayTodos = [
-  { name: 'Iniciar una partida', status: false },
-  { name: 'Excluir amigo', status: false },
-];
 
 const Todos = ({ todos }) => {
   return (
@@ -37,12 +33,12 @@ function App() {
 
   return (
     <div className="App">
+      <Login></Login>
       <header className="App-header">
-        <Todos todos={arrayTodos}></Todos>
         {todos.status && todos && (
           <div>
             {todos.data.map((item) => (
-              <div>{item.username}</div>
+              <div key={item.id}>{item.username}</div>
             ))}
           </div>
         )}
