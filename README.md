@@ -1,4 +1,6 @@
 # APP FullStack - Bank
+  <img alt="[Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://www.devmedia.com.br/arquivos/Artigos/43033/fig7.png">
+
 
 ## Front-End
 
