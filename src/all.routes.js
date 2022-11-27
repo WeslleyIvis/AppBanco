@@ -50,8 +50,8 @@ allRoutes.post('/:table', async (req, res) => {
 
 allRoutes.get('/:table', async (req, res) => {
   const { table } = req.params;
+  console.log(req.body);
   let get;
-
   if (table == 'users') get = await prisma.users.findMany();
   if (table == 'accounts') get = await prisma.accounts.findMany();
   if (table == 'transactions') get = await prisma.transactions.findMany();

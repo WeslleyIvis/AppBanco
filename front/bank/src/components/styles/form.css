@@ -8,6 +8,7 @@ h2 {
 }
 
 .loginArea {
+    text-align: center;
     box-sizing: border-box;
 }
 
@@ -36,11 +37,8 @@ h2 {
     margin: 10px 0;
     width: 95%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
     cursor: pointer;
-}
-
-.loginAreaOptions {
-
 }
 
 .new {
